@@ -1,0 +1,47 @@
+.title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h3{
+        font: 400 1.5rem/2rem 'Poppins';
+    }
+    button{
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .normal{
+            background-color: #eee;
+            color: #000;
+    }
+}
+.weather-details{
+    display: flex;
+
+    .img-icon{
+        max-width: 200px;
+        width: 100%;
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.weekly-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    gap: 10px;
+    
+
+    .daily-cards{
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        flex: 1;
+    }
+}

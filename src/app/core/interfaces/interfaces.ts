@@ -3,9 +3,23 @@ export interface CounterState {
     entities: { [id: number]: number };
     currentCount: number;
 }
-
+// Weather
 export interface WeatherState {
-    ids: number[];
-    entities: { [id: number]: number };
-    currentCount: number;
+    weatherData: any | null;
+    error: any | null;
+    loading: boolean;
+  }
+  
+
+// Locations
+export interface Location {
+    id?: number;
+    cityName?: string;
+    lastTemperature?: number;
+    weatherStatus?: string;
+}
+
+export interface LocationsState {
+    locations: Location[];
+    error?: any;
 }

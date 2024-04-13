@@ -1,1 +1,22 @@
-<p>vatavaran works!</p>
+<div class="weather-wrapper">
+    <div class="left-block">
+        <div class="input-container">
+            <input type="text" placeholder="Enter City Name" [(ngModel)]="city"><button (click)="getCityWeather(city)">Add</button>
+        </div>
+        <div class="list-container">
+            @for (location of locations; track $index) {
+            <div class="list">
+                <div (click)="selectLocation(location?.id)" class="list-name">Mumbai</div>
+                <div class="list-actions">
+                    <button class="normal"> Refresh</button>
+                    <button class="danger" (click)="removeLocation(location?.id)">Delete</button>
+                </div>
+            </div>
+        }
+        </div>
+        <button class="clear">Clear</button>
+    </div>
+    <div class="right-block">
+       <app-weather [location]="selectedLocation"></app-weather>
+    </div>
+</div>

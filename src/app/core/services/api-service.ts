@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  apiUrl = '';
+  apiUrl = 'https://api.openweathermap.org/';
 
   constructor(private http: HttpClient) {}
 
