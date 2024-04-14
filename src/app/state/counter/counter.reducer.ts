@@ -3,9 +3,9 @@ import * as CounterActions from './counter.action';
 import { CounterState } from '../../core/interfaces/interfaces';
 
 const initialState: CounterState = {
-    ids: [0],
-    entities: {'0': 0},
-    currentCount: 1
+    ids: [],
+    entities: {},
+    currentCount: 0
 }
 
 export const counterReducer = createReducer(

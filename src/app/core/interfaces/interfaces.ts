@@ -3,7 +3,9 @@ export interface CounterState {
     entities: { [id: number]: number };
     currentCount: number;
 }
-
 export interface LocationState {
-    locations: any[] | null;
-  }
+    location: any[];
+    loading:boolean,
+    selectedLocation:{}
+}
+

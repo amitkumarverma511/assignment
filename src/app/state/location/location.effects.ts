@@ -4,6 +4,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import * as locationActions from './location.actions';
 import { ApiService } from '../../core/services/api-service';
 import { ToastrService } from 'ngx-toastr';
+import { of } from 'rxjs';
 
 @Injectable()
 export class LocationEffects {
@@ -17,14 +18,27 @@ export class LocationEffects {
             ofType(locationActions.loadLocations),
             switchMap((action) => {
                 const cityName = action.cityName
-                return this.apiService.get('data/2.5/weather', { q: cityName, appid: 'd4594364698122bfd1c4b3eb5f2ff19f' }).pipe(
-                    map((locations) => locationActions.loadLocationsSuccess({ locations })),
-                    catchError( (error) =>{
+                return this.apiService.get('data/2.5/forecast', { q: cityName, appid: 'd4594364698122bfd1c4b3eb5f2ff19f', units: 'metric' }).pipe(
+                    map((locations) => {
+                        const filteredData: any[] = [];
+                        const processedDates = new Set();
+                        locations.list.forEach((entry: any) => {
+                            const date = new Date(entry.dt_txt).toLocaleDateString();
+                            if (!processedDates.has(date)) {
+                                filteredData.push(entry);
+                                processedDates.add(date);
+                            }
+                        });
+                        locations.list = filteredData
+                        return locationActions.loadLocationsSuccess({ locations })
+                    }),
+                    
+                    catchError((error) => {
                         this.toaster.error(error.error.message)
-                        throw error;
+                        return of(locationActions.loadLocationsFailure());
                     })
                 )
-            })
+            }),
         )
     );
 }
